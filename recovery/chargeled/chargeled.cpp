@@ -42,8 +42,8 @@
 #define LED_CHARGED "100c800"
 
 #define STR_BUF_SIZE 128
-#define UEVENT_BUF_SIZE 64*1024
-#define UEVENT_MSG_LEN 1024
+#define UEVENT_BUF_SIZE 256*1024
+#define UEVENT_MSG_LEN 2048
 static int uevent_fd;
 
 /* Matches frameworks/native/include/batteryservice/BatteryService.h */
