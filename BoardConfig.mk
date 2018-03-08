@@ -46,7 +46,7 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000
 BOARD_MKBOOTIMG_ARGS += --tags_offset 0x00000100 --board recovery:0
-TARGET_PREBUILT_KERNEL := device/htc/oce/kernel
+TARGET_PREBUILT_KERNEL := device/htc/$(TARGET_DEVICE)/kernel
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
@@ -69,11 +69,12 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_CRYPTO := true
-TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd
+TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd hwservicemanager keymaster-3-0
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_NO_EXFAT_FUSE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_RECOVERY_DEVICE_MODULES := chargeled # strace twrpdec
+TARGET_RECOVERY_DEVICE_MODULES := chargeled tzdata # strace twrpdec
+TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/usr/share/zoneinfo/tzdata
 
 # Shift TWRP off the secondary screen
 TW_Y_OFFSET := 160
@@ -81,5 +82,9 @@ TW_H_OFFSET := -160
 endif # WITH_TWRP
 
 # Vendor Init
-TARGET_INIT_VENDOR_LIB := libinit_oce
+BOARD_VENDOR := htc
+TARGET_INIT_VENDOR_LIB := libinit_$(TARGET_DEVICE)
 TARGET_RECOVERY_DEVICE_MODULES := libinit_oce
+
+# Additional sepolicy for hwservicemanager
+BOARD_SEPOLICY_DIRS += device/htc/$(TARGET_DEVICE)/sepolicy

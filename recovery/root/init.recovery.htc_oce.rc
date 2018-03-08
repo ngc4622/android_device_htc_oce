@@ -4,6 +4,8 @@ on init
     echo 0 > /sys/devices/soc/7577000.i2c/i2c-3/3-002c/backlight/lcd-backlight/brightness
     echo 0 > /sys/devices/soc/7577000.i2c/i2c-3/3-002c/backlight/lcd-backlight/max_brightness
 
+    # Load Tuxera exfat module
+    insmod /system/lib/modules/texfat.k
 on boot
     start chargeled
 
