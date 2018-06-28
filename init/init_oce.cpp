@@ -1,6 +1,5 @@
 /*
-   Copyright (C) 2013, The Linux Foundation. All rights reserved.
-   Copyright (C) 2017 The Android Open Source Project
+   Copyright (c) 2013, The Linux Foundation. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -29,13 +28,31 @@
  */
 
 #include <stdlib.h>
+#include <unistd.h>
 
+#include <android-base/logging.h>
+#include <cutils/properties.h>
 #include "vendor_init.h"
-#include "property_service.h"
-#include "log.h"
-#include "util.h"
 
-#include "init_htcCommon.h"
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
+
+void property_override(char const prop[], char const value[])
+{
+    prop_info *pi;
+
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+        __system_property_update(pi, value, strlen(value));
+    else
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+}
+
+void property_override_dual(char const system_prop[], char const vendor_prop[], char const value[])
+{
+    property_override(system_prop, value);
+    property_override(vendor_prop, value);
+}
 
 void vendor_load_properties()
 {
@@ -45,33 +62,31 @@ void vendor_load_properties()
     char device[PROP_VALUE_MAX];
     int rc;
 
-    rc = property_get_sdk23("ro.board.platform", platform);
+    rc = property_get("ro.board.platform", platform, NULL);
     if (!rc || strncmp(platform, ANDROID_TARGET, PROP_VALUE_MAX))
         return;
 
-    property_get_sdk23("ro.boot.mid", bootmid);
-    property_get_sdk23("ro.boot.cid", bootcid);
+    property_get("ro.boot.mid", bootmid, NULL);
+    property_get("ro.boot.cid", bootcid, NULL);
 
     if (strstr(bootmid, "2PZF10000")) {
         /* Europe (OCE_UHL) */
-        property_set("ro.build.product", "htc_oceuhl");
-        property_set("ro.product.model", "HTC U Ultra");
+        property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_oceuhl");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC U Ultra");
     } else if (strstr(bootmid, "2PZF20000")) {
         /* Dual SIM Dual Netcom UHL Europe Africa Asia (OCE_DUGL) */
-        property_set("ro.build.product", "htc_ocedugl");
-        property_set("ro.product.model", "HTC_U-1u");
+        property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_ocedugl");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC_U-1u");
     } else if (strstr(bootmid, "2PZF30000")) {
         /* Dual card full Netcom UHL China (OCE_DUGL) */
-        property_set("ro.build.product", "htc_ocedugl");
-        property_set("ro.product.model", "HTC_U-1w");
+        property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_ocedugl");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC_U-1w");
     } else {
         /* GSM (OCE_UL) */
-        property_set("ro.build.product", "htc_oceul");
-        property_set("ro.product.model", "HTC U Ultra");
+        property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_oceul");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC U Ultra");
     }
 
-    set_props_from_build();
-
-    property_get_sdk23("ro.product.device", device);
-    ERROR("Found bootmid %s setting build properties for %s device\n", bootmid, device);
+    property_get("ro.product.device", device, NULL);
+    LOG(ERROR) << "Found bootmid " << bootmid << " setting build properties for " << device << " device\n";
 }
