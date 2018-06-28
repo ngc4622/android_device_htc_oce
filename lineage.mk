@@ -14,16 +14,15 @@
 # limitations under the License.
 #
 
-# Get the prebuilt list of APNs
-$(call inherit-product, vendor/omni/config/cdma.mk)
+# Inherit from LineageOS
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+# Inherit from oce
+$(call inherit-product, device/htc/oce/device.mk)
 
-# Inherit from our custom product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
-
-PRODUCT_NAME := omni_oce
+PRODUCT_NAME := lineage_oce
 PRODUCT_DEVICE := oce
 PRODUCT_BRAND := htc
 PRODUCT_MODEL := HTC U Ultra
