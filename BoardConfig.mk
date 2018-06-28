@@ -62,6 +62,10 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 # Keymaster
 TARGET_HW_DISK_ENCRYPTION := true
 
+# Display
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1440
+
 # TWRP Build Flags
 ifeq ($(WITH_TWRP),true)
 TW_THEME := portrait_hdpi
