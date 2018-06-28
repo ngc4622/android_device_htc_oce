@@ -79,6 +79,7 @@ TW_NO_EXFAT_FUSE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_DEVICE_MODULES := chargeled tzdata # strace twrpdec
 TW_RECOVERY_ADDITIONAL_RELINK_FILES := $(OUT)/system/usr/share/zoneinfo/tzdata
+TW_USE_TOOLBOX := true
 
 # Shift TWRP off the secondary screen
 TW_Y_OFFSET := 160
