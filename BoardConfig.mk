@@ -89,6 +89,3 @@ endif # WITH_TWRP
 BOARD_VENDOR := htc
 TARGET_INIT_VENDOR_LIB := libinit_$(TARGET_DEVICE)
 TARGET_RECOVERY_DEVICE_MODULES := libinit_oce
-
-# Additional sepolicy for hwservicemanager
-BOARD_SEPOLICY_DIRS += device/htc/$(TARGET_DEVICE)/sepolicy
