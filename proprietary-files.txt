@@ -1,0 +1,6 @@
+# sbin files
+-sbin/crashdump;rootfs
+-sbin/diagloader;rootfs
+-sbin/htc_ebdlogd_recvy;rootfs
+-sbin/htc_radio_recovery;rootfs
+-sbin/memory-dump;rootfs

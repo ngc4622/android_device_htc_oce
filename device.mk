@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Include proprietary bits
+$(call inherit-product, vendor/htc/oce/oce-vendor.mk)
+
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/root/00-memory-dump:root/crashdump.d/00-memory-dump \
