@@ -1,0 +1,3 @@
+on boot
+    insmod /system/lib/modules/texfat.ko
+    insmod /vendor/lib/modules/texfat.ko

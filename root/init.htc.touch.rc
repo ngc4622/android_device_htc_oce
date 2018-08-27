@@ -1,0 +1,14 @@
+on fs
+    # SiW LPWG
+    chown system system   /sys/devices/virtual/input/siw_touch_input/lpwg_notify
+
+    chown system system   /sys/android_touch/bus_switch
+    chown system system   /sys/android_touch/reset
+
+    # SiW watch
+    chown system system   /sys/devices/virtual/input/siw_ext_watch/config_fonteffect
+    chown system system   /sys/devices/virtual/input/siw_ext_watch/config_fontposition
+    chown system system   /sys/devices/virtual/input/siw_ext_watch/config_fontproperty
+    chown seconddisplay seconddisplay   /sys/android_touch/enable_clock
+    chmod 0660 /sys/android_touch/enable_clock
+

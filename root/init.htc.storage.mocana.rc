@@ -1,0 +1,15 @@
+on fs
+    # Load Mocana FIPS module
+    insmod /system/lib/modules/moc_platform_mod.ko.3.18
+    insmod /system/lib/modules/moc_crypto.ko.3.18
+    insmod /system/lib/modules/moc_crypto_api_tmpl.ko.3.18
+
+# Insert ecryptfs module by script to decrease boot time
+on property:sys.boot_completed=1
+    start mocana-startup
+
+service mocana-startup /system/vendor/bin/sh /system/etc/init.mocana.sh
+    class late_start
+    user root
+    disabled
+    oneshot

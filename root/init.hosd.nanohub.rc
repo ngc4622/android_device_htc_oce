@@ -1,0 +1,15 @@
+on late-ftm
+    mkdir /data/system 0775 system system
+    ## ensure correct calibration file permissions
+    chown root system /persist/sensorcal.json
+    chmod 0660 /persist/sensorcal.json
+
+on late-ftm
+    start nanohub-reset
+
+service nanohub-reset /system/bin/nanoapp_cmd reset
+    oneshot
+    disabled
+    user root
+    group system
+

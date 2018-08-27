@@ -1,0 +1,2 @@
+# output-path=apq
+/sbin/memory-dump -u %u -d %d %o
