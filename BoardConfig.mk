@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+COMMON_PATH := device/htc/oce
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8996
 TARGET_NO_BOOTLOADER := true
@@ -73,6 +75,9 @@ TARGET_HW_DISK_ENCRYPTION := true
 # Display
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
+
+# Recovery
+TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/root/fstab.qcom
 
 # TWRP Build Flags
 ifeq ($(WITH_TWRP),true)
