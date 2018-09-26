@@ -21,6 +21,10 @@ $(call inherit-product, vendor/htc/oce/oce-vendor.mk)
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
+# Screen density
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
+
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/root/00-memory-dump:root/crashdump.d/00-memory-dump \
