@@ -50,7 +50,7 @@ BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000
 BOARD_MKBOOTIMG_ARGS += --tags_offset 0x00000100 --board recovery:0
 
 TARGET_KERNEL_SOURCE := kernel/htc/oce
-TARGET_KERNEL_CONFIG := oce_defconfig
+TARGET_KERNEL_CONFIG := lineage_oce_defconfig
 TARGET_KERNEL_ARCH := arm64
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
