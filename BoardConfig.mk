@@ -53,6 +53,7 @@ TARGET_KERNEL_SOURCE := kernel/htc/oce
 TARGET_KERNEL_CONFIG := lineage_oce_defconfig
 TARGET_KERNEL_ARCH := arm64
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+NEED_KERNEL_MODULE_SYSTEM := true
 
 BOARD_ROOT_EXTRA_FOLDERS := bt_firmware crashdump.d dsp firmware persist
 
