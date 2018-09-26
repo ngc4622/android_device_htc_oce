@@ -17,6 +17,10 @@
 # Include proprietary bits
 $(call inherit-product, vendor/htc/oce/oce-vendor.mk)
 
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1440
+
 # Ramdisk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/root/00-memory-dump:root/crashdump.d/00-memory-dump \
