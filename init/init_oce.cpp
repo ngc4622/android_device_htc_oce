@@ -1,5 +1,6 @@
 /*
    Copyright (c) 2013, The Linux Foundation. All rights reserved.
+   Copyright (c) 2018 The LineageOS Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -68,24 +69,25 @@ void vendor_load_properties()
 
     property_get("ro.boot.mid", bootmid, NULL);
     property_get("ro.boot.cid", bootcid, NULL);
-
-    if (strstr(bootmid, "2PZF10000")) {
+// 
+//     if (strstr(bootmid, "2PZF10000")) {
         /* Europe (OCE_UHL) */
         property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_oceuhl");
         property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC U Ultra");
-    } else if (strstr(bootmid, "2PZF20000")) {
-        /* Dual SIM Dual Netcom UHL Europe Africa Asia (OCE_DUGL) */
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_ocedugl");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC_U-1u");
-    } else if (strstr(bootmid, "2PZF30000")) {
-        /* Dual card full Netcom UHL China (OCE_DUGL) */
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_ocedugl");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC_U-1w");
-    } else {
-        /* GSM (OCE_UL) */
-        property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_oceul");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC U Ultra");
-    }
+property_override("ro.product.device", "htc_oceuhl");
+//     } else if (strstr(bootmid, "2PZF20000")) {
+//         /* Dual SIM Dual Netcom UHL Europe Africa Asia (OCE_DUGL) */
+//         property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_ocedugl");
+//         property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC_U-1u");
+//     } else if (strstr(bootmid, "2PZF30000")) {
+//         /* Dual card full Netcom UHL China (OCE_DUGL) */
+//         property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_ocedugl");
+//         property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC_U-1w");
+//     } else {
+//         /* GSM (OCE_UL) */
+//         property_override_dual("ro.build.product", "ro.vendor.build.product", "htc_oceul");
+//         property_override_dual("ro.product.model", "ro.vendor.product.model", "HTC U Ultra");
+//     }
 
     property_get("ro.product.device", device, NULL);
     LOG(ERROR) << "Found bootmid " << bootmid << " setting build properties for " << device << " device\n";
